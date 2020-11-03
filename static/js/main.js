@@ -51,9 +51,10 @@ function add_rlt(){
         var contenuText = document.createElement("p");
         var y = document.createTextNode("contenu onglet " + String(i + 1));
         contenuText.appendChild(y);
+        contenuChamps = contenuRlt();
         
         contenu.appendChild(title);
-        contenu.appendChild(contenuText);
+        contenu.appendChild(contenuChamps);
         
         contenu_onglets.appendChild(contenu);
     }
@@ -65,7 +66,9 @@ function add_rlt(){
 }
 function contenuRlt(){
     var nomBagues = ["bague OR", "bague IR"];
-    var parameters = [["D", "Do", "Lo", "ko", "Bo", "mat"], ["d", "Di", "ki", "Bi", "mat"]];
+    var parameters = [["D", "Do", "Lo", "ko", "Bo", "mat"], ["d", "Di", "Li", "ki", "Bi", "mat"]];
+    
+    var materiaux = ["W14", "W19", "W21"]
     
     var par_rlt = document.createElement("div");
     for (var i = 0; i < 2; i++){
@@ -73,24 +76,45 @@ function contenuRlt(){
         var form = document.createElement("form");
         form.onsubmit = "return false";
         
-        for (var j = 0; j < parameters[i]; j++){
+        for (var j = 0; j < parameters[i].length; j++){
             var div = document.createElement("div");
             var label = document.createElement("label");
             var text = document.createTextNode(parameters[i][j]);
-            label.appendChild(text)
-            div.appendChild(label)
+            label.appendChild(text);
+            div.appendChild(label);
             if (j < 5){
-                var input = document.createElement("input")
-                input.id = parameters[i][j]
-                input.setAttribute('type','number')
+                var input = document.createElement("input");
+                input.id = parameters[i][j];
+                input.setAttribute('type','number');
+                var proba = document.createElement('a');
+                proba.id = "proba_" + parameters[i][j];
+                proba.className = "proba";
+                var y = document.createTextNode("...");
+                proba.appendChild(y);
+                proba.href = "proba.html"
+                div.appendChild(input);
+                div.appendChild(proba);
             }
+            else{
+                input = document.createElement("select");
+                input.id = "mat_select";
+                for (var k = 0; k < materiaux.length; k++){
+                    var option = document.createElement("option");
+                    option.value = materiaux[k];
+                    option.text = materiaux[k];
+                    input.appendChild(option);
+                    div.appendChild(input);
+                }
+            }
+            form.appendChild(div);
         }
         
         var bague = document.createElement("div");
         bague.id = nomBagues[i];
         bague.appendChild(form);
         
-        par_rlt.appendChild(bageu)
+        par_rlt.appendChild(bague);
     }
+    return par_rlt;
     
 }
