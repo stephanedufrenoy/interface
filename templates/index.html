@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title> My Stydy </title>
+    <link rel="stylesheet" href="../static/css/style.css" type="text/css" media="screen" />
+</head>
+<body>
+    <div class="nb">
+        <form onsubmit="return false">
+            <label> Nombre </label>
+            <input type="number" id="nbRlt" value="2" step=1 min=1 onchange="javascript:change_nbRlt()">
+        </form>
+    </div>
+    <div id="systeme_onglets"></div>
+    <div id="divClick">
+        <button> click </button>
+    </div>
+    <script type=text/javascript src="../static/js/main.js"></script>
+    <script type="text/javascript">
+        var anc_onglet = '1';
+        var nbRlt = parseInt(document.getElementById("nbRlt").value);
+        var element = document.getElementById("systeme_onglets");
+        element.parentNode.removeChild(element);
+        add_rlt();
+        change_onglet(anc_onglet);
+    </script>
+</body>
+</html>
